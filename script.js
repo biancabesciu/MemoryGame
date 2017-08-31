@@ -5,3 +5,8 @@ function tile(x, y) {
     this.y = y;
     this.width = 70;
 }
+
+//create tiles at appropiate x and y positions
+let tiles = [];
+const numCols = 5;
+
