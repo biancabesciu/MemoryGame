@@ -1,0 +1,9 @@
+//make header responsive
+@media screen and (max-width: 600px) {
+    header {
+        p{
+            text-indent: 0;
+            margin-top: .5em;
+        }
+    }
+}

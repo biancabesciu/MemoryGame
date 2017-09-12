@@ -1,7 +1,114 @@
-/*GAME PLAY:
- // The game consists of an even number of tiles with images on one side and a generic back. Each image appears on precisely two tiles.
- // When the game starts, all tiles are turned face down.
- // The player then flips over two cards, selecting them by clicking on them. If the two tiles have the same image, they remain face up. Otherwise, the tiles flip back over after a small period of time.
- // The goal of the game is to get all the tiles flipped face up (i.e., find all the matching image pairs) in the least number of tries. That means that lower number of tries are better scores.
+/* WHAT THE APP DOES
+   API-based app, that uses the iTunes API
+   User will take the URL of any iOS or Mac app and render its full resolution icon right in the browser.
  */
 
+let Gimmie = {
+    $content: $('.content'),
+    $form: $('form'),
+
+    // show a “loading” state when a user submits the form
+    toggleLoading: function(){
+        // Toggle loading indicator
+        this.$content.toggleClass('content--loading');
+
+        // Toggle the submit button so we don't get double submissions
+        // http://stackoverflow.com/questions/4702000/toggle-input-disabled-attribute-using-jquery
+        this.$form.find('button').prop('disabled', function(i, v) { return !v; });
+    },
+
+    //creating 3 variables
+    //user input
+    userInput: '',
+    //boolean which will be true or false
+    //depending on whether the input from the user is valid
+    userInputIsValid: false,
+    //string of digits
+    //will be extracted from userInput if it’s valid
+    appId: '',
+
+    //will validate the user’s input when called
+    validate: function(input) {
+        // validation happens here
+        // Use regular expressions to test if input is valid. It's valid if:
+        // 1. It begins with 'http://itunes'
+        const regUrl = /^(http|https):\/\/itunes/;
+        // 2. It has '/id' followed by digits in the string somewhere
+        const regId = /\/id(\d+)/i;
+        if ( regUrl.test(this.userInput) && regId.test(this.userInput) ) {
+            this.userInputIsValid = true;
+            //extract the ID from the URL and set it as appId
+            let id = regId.exec(this.userInput);
+            this.appId = id[1];
+        } else {
+            //set userInputIsValid to false
+            //and the appId to an empty string
+            this.userInputIsValid = false;
+            this.appId = '';
+        }
+    },
+
+    //creating error function
+    throwError: function(header, text){
+        this.$content
+            //add header and text in the html
+        //with the content-error class, so it can be styled
+            .html('<p><strong>' + header + '</strong> ' + text + '</p>')
+            .addClass('content--error');
+
+        //run function to remove loading class
+        //stops loading the gif
+        this.toggleLoading();
+    }
+};
+
+$(document).ready(function(){
+    // On page load, execute this...
+    Gimmie.$form.on('submit', function(e){
+        e.preventDefault(); //don't refresh the page
+
+        // Do more stuff here...
+        Gimmie.toggleLoading(); // call the loading function
+
+        //set to the value of the form's input field
+        Gimmie.userInput = $(this).find('input').val();
+        //execute the validation function in Gimmie.validate()
+        Gimmie.validate();
+        if( Gimmie.userInputIsValid ) {
+            /* if input valid make API request */
+            $.ajax({
+                url: "https://itunes.apple.com/lookup?id=" + Gimmie.appId,
+                dataType: 'JSONP'
+            })
+            .done(function(response) {
+                // when finished
+                // Get the first response and log it
+                let response = response.results[0];
+                console.log(response);
+
+                // Check to see if request is valid & contains the info we want
+                // If it does, render it. Otherwise throw an error
+                if(response && response.artworkUrl512 !== null){
+                    Gimmie.render(response);
+                } else {
+                    Gimmie.throwError(
+                        'Invalid Response',
+                        'The request you made appears to not have an associated icon. <br> Try a different URL.'
+                    );
+                }
+                })
+            .fail(function(data) {
+                // when request fails
+                Gimmie.throwError(
+                    'iTunes API Error',
+                    'There was an error retrieving the info. Check the iTunes URL or try again later.');
+                });
+        } else {
+            /* else throw an error */
+            Gimmie.throwError(
+                'Invalid Link',
+                'You must submit a standard iTunes store link with an ID, i.e. <br> <a href="https://itunes.apple.com/us/app/twitter/id333903271?mt=8">https://itunes.apple.com/us/app/twitter/<em>id333903271</em>?mt=8</a>'
+            );
+        }
+    });
+});
