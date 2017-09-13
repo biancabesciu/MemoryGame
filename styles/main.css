@@ -1,11 +1,7 @@
 /*
-    General Styles
+General Styles
 
-    Colors
-    @highlight: #196E76
-    @text: #4A4A4A;
-    @text-light: #9A9A9A
-    @body-background: #EEEEEE;
+  Colors
 */
 @media screen and (max-width: 600px) {
   header p {
@@ -21,7 +17,7 @@
 
 html {
   box-sizing: border-box;
-  background: #EEEEEE;
+  background: #d7c6cf;
   text-align: center; }
 
 /*Using body as wrapper by setting it's max-width*/
@@ -32,7 +28,7 @@ body {
   max-width: 43.75em;
   margin: 0 auto;
   padding: 0;
-  color: #4A4A4A;
+  color: dimgray;
   /*
     Header Styles
     */
@@ -51,9 +47,9 @@ body {
     color: inherit; }
   body header {
     margin: 1em 0 2em;
-    color: #196E76; }
+    color: #363b74; }
     body header h1 {
-      font-family: 'Pacifico', serif;
+      font-family: "Acme", sans-serif;
       font-size: 3em;
       text-shadow: 0 4px 2px rgba(0, 0, 0, 0.1);
       margin: 0; }
@@ -82,16 +78,16 @@ body {
       -o-border-radius: 3px;
       border-radius: 3px; }
       body form input :focus {
-        border-color: #298cda; }
+        border-color: #d7c6cf; }
     body form button {
       text-decoration: none;
-      background: #196E76;
+      background: #363b74;
       height: 100%;
       position: absolute;
       right: 0;
       top: 0;
       line-height: 1.5;
-      color: white;
+      color: #dfdfde;
       font-size: 1em;
       -webkit-border-radius: 0 3px 3px 0;
       -moz-border-radius: 0 3px 3px 0;
@@ -104,13 +100,13 @@ body {
       -webkit-appearance: none;
       margin: 0;
       padding: 0 1em;
-      font-family: 'Pacifico', serif; }
+      font-family: "Acme", sans-serif; }
       body form button :hover {
         cursor: pointer; }
       body form button :disabled {
         opacity: .5; }
   body .wrapper {
-    background: #fff;
+    background: #dfdfde;
     border: 1px solid #ccc;
     text-align: center;
     padding: 2em;
@@ -136,7 +132,7 @@ body {
       display: block; }
     body .content em {
       font-style: normal;
-      background-color: lightyellow; }
+      background-color: #ebdada; }
   body .content--loading :before {
     content: '';
     position: absolute;
@@ -144,7 +140,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: #fff;
+    background: #ebdada;
     opacity: .9;
     z-index: 10; }
   body .content--loading :after {
@@ -156,4 +152,4 @@ body {
     margin-top: -16px;
     z-index: 11; }
   body .content--error {
-    color: #196E76; }
+    color: #363b74; }

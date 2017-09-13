@@ -1,12 +1,14 @@
 /*
-    General Styles
+General Styles
 
-    Colors
-    @highlight: #196E76
-    @text: #4A4A4A;
-    @text-light: #9A9A9A
-    @body-background: #EEEEEE;
+  Colors
 */
+
+$highlight: #363b74;
+$text: dimgray;
+$text-light: #9A9A9A;
+$body-background: #d7c6cf;
+$font: 'Acme', sans-serif;
 
 @import 'media';
 
@@ -30,7 +32,7 @@
 
 html {
     box-sizing: border-box;
-    background: #EEEEEE;
+    background: $body-background;
     text-align: center;
 }
 
@@ -42,7 +44,7 @@ body {
     max-width: 43.75em; // 880/16
     margin: 0 auto;
     padding: 0;
-    color: #4A4A4A;
+    color: $text;
 
     img {
         max-width: 100%;
@@ -59,10 +61,10 @@ body {
 
     header {
         margin: 1em 0 2em;
-        color: #196E76;
+        color: $highlight;
 
         h1 {
-            font-family: 'Pacifico', serif;
+            font-family: $font;
             font-size: 3em;
             text-shadow: 0 4px 2px rgba(0, 0, 0, .1);
             margin: 0;
@@ -101,20 +103,20 @@ body {
             0 2px 4px rgba(0, 0, 0, .1);
             @include border-radius(3px);
 
-            :focus {
-                border-color: #298cda;
+            &:focus {
+                border-color: #d7c6cf;
             }
         }
 
         button {
             text-decoration: none;
-            background: #196E76;
+            background: $highlight;
             height: 100%;
             position: absolute;
             right: 0;
             top: 0;
             line-height: 1.5;
-            color: white;
+            color: #dfdfde;
             font-size: 1em;
             @include border-radius(0 3px 3px 0);
             border: 0;
@@ -123,13 +125,13 @@ body {
             -webkit-appearance: none;
             margin: 0;
             padding: 0 1em;
-            font-family: 'Pacifico', serif;
+            font-family: $font;
 
-            :hover {
+            &:hover {
                 cursor: pointer;
             }
 
-            :disabled {
+            &:disabled {
                 opacity: .5;
             }
         }
@@ -141,7 +143,7 @@ body {
     Main container for content, i.e. the icons, error messages, etc
     */
     .wrapper {
-        background: #fff;
+        background: #dfdfde;
         border: 1px solid #ccc;
         text-align: center;
         padding: 2em;
@@ -170,7 +172,7 @@ body {
 
         em {
             font-style: normal;
-            background-color: lightyellow;
+            background-color: #ebdada;
         }
     }
 
@@ -178,20 +180,20 @@ body {
     .content--loading {
 
         //creates a slightly opaque white overlay on the content area
-        :before {
+        &:before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: #fff;
+            background: #ebdada;
             opacity: .9;
             z-index: 10;
         }
 
         //displays an animated loading gif inside our box
-        :after {
+        &:after {
             content: url('../Loading_icon.gif');
             position: absolute;
             left: 50%;
@@ -203,7 +205,14 @@ body {
     }
 
     .content--error {
-        color: #196E76;
+        color: $highlight;
+    }
+
+    //style the positioning mask over the icon
+    img[src*="icon-mask.png"] {
+        position: absolute;
+        left: 0;
+        top: 0;
     }
 
 }

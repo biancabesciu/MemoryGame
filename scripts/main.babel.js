@@ -52,13 +52,43 @@ let Gimmie = {
     throwError: function(header, text){
         this.$content
             //add header and text in the html
-        //with the content-error class, so it can be styled
+            //with the content-error class, so it can be styled
             .html('<p><strong>' + header + '</strong> ' + text + '</p>')
             .addClass('content--error');
 
         //run function to remove loading class
         //stops loading the gif
         this.toggleLoading();
+    },
+
+    //creating render function
+    render: function(response) {
+        //creats a HTMLImageElement
+        let icon = new Image();
+        //the browser will fetch the img of this specified URL
+        icon.src = response.artworkUrl512;
+        //when it's done fetching the img
+        //starts this function
+        icon.onload = function() {
+            //set the HTML $content to the retrieved img
+            Gimmie.$content
+                .html(this)
+                //grabs the trackName from the API responds and appends it
+                //shows the app's name along with its icon
+                .append('<p><strong>' + response.trackName + '</strong></p>')
+                .removeClass('content--error');
+            //execute toggleLoading
+            Gimmie.toggleLoading();
+
+            // If it's an iOS icon, load the mask too
+            if(response.kind !== 'mac-software') {
+                let mask = new Image();
+                mask.src = 'icon-mask.png';
+                mask.onload = function () {
+                    Gimmie.$content.prepend(this);
+                }
+            }
+        }
     }
 };
 
@@ -71,10 +101,10 @@ $(document).ready(function(){
         Gimmie.toggleLoading(); // call the loading function
 
         //set to the value of the form's input field
-        Gimmie.userInput = $(this).find('input').val();
+        Gimmie.userInput = $(this).find('input').value;
         //execute the validation function in Gimmie.validate()
         Gimmie.validate();
-        if( Gimmie.userInputIsValid ) {
+        if(Gimmie.userInputIsValid) {
             /* if input valid make API request */
             $.ajax({
                 url: "https://itunes.apple.com/lookup?id=" + Gimmie.appId,
