@@ -3,7 +3,7 @@
    User will take the URL of any iOS or Mac app and render its full resolution icon right in the browser.
  */
 
-let Gimmie = {
+let Fetch = {
     $content: $('.content'),
     $form: $('form'),
 
@@ -71,21 +71,21 @@ let Gimmie = {
         //starts this function
         icon.onload = function() {
             //set the HTML $content to the retrieved img
-            Gimmie.$content
+            Fetch.$content
                 .html(this)
                 //grabs the trackName from the API responds and appends it
                 //shows the app's name along with its icon
                 .append('<p><strong>' + response.trackName + '</strong></p>')
                 .removeClass('content--error');
             //execute toggleLoading
-            Gimmie.toggleLoading();
+            Fetch.toggleLoading();
 
             // If it's an iOS icon, load the mask too
             if(response.kind !== 'mac-software') {
                 let mask = new Image();
                 mask.src = 'img/icon-mask.png';
                 mask.onload = function () {
-                    Gimmie.$content.prepend(this);
+                    Fetch.$content.prepend(this);
                 }
             }
         }
@@ -94,20 +94,20 @@ let Gimmie = {
 
 $(document).ready(function(){
     // On page load, execute this...
-    Gimmie.$form.on('submit', function(e){
+    Fetch.$form.on('submit', function(e){
         e.preventDefault(); //don't refresh the page
 
         // Do more stuff here...
-        Gimmie.toggleLoading(); // call the loading function
+        Fetch.toggleLoading(); // call the loading function
 
         //set to the value of the form's input field
-        Gimmie.userInput = $(this).find('input').val();
-        //execute the validation function in Gimmie.validate()
-        Gimmie.validate();
-        if(Gimmie.userInputIsValid) {
+        Fetch.userInput = $(this).find('input').val();
+        //execute the validation function in Fetch.validate()
+        Fetch.validate();
+        if(Fetch.userInputIsValid) {
             /* if input valid make API request */
             $.ajax({
-                url: "https://itunes.apple.com/lookup?id=" + Gimmie.appId,
+                url: "https://itunes.apple.com/lookup?id=" + Fetch.appId,
                 dataType: 'json'
             })
             .done(function(response2) {
@@ -119,9 +119,9 @@ $(document).ready(function(){
                 // Check to see if request is valid & contains the info we want
                 // If it does, render it. Otherwise throw an error
                 if(response && response.artworkUrl512 !== null){
-                    Gimmie.render(response);
+                    Fetch.render(response);
                 } else {
-                    Gimmie.throwError(
+                    Fetch.throwError(
                         'Invalid Response',
                         'The request you made appears to not have an associated icon. <br> Try a different URL.'
                     );
@@ -129,13 +129,13 @@ $(document).ready(function(){
                 })
                 .fail(function(data) {
                 // when request fails
-                Gimmie.throwError(
+                Fetch.throwError(
                     'iTunes API Error',
                     'There was an error retrieving the info. Check the iTunes URL or try again later.');
             });
         } else {
             /* else throw an error */
-            Gimmie.throwError(
+            Fetch.throwError(
                 'Invalid Link',
                 'You must submit a standard iTunes store link with an ID, i.e. <br> <a href="https://itunes.apple.com/us/app/twitter/id333903271?mt=8">https://itunes.apple.com/us/app/twitter/<em>id333903271</em>?mt=8</a>'
             );
