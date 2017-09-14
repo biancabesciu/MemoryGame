@@ -101,19 +101,19 @@ $(document).ready(function(){
         Gimmie.toggleLoading(); // call the loading function
 
         //set to the value of the form's input field
-        Gimmie.userInput = $(this).find('input').value;
+        Gimmie.userInput = $(this).find('input').val();
         //execute the validation function in Gimmie.validate()
         Gimmie.validate();
         if(Gimmie.userInputIsValid) {
             /* if input valid make API request */
             $.ajax({
                 url: "https://itunes.apple.com/lookup?id=" + Gimmie.appId,
-                dataType: 'JSONP'
+                dataType: 'json'
             })
-            .done(function(response) {
+            .done(function(response2) {
                 // when finished
                 // Get the first response and log it
-                let response = response.results[0];
+                let response = response2.results[0];
                 console.log(response);
 
                 // Check to see if request is valid & contains the info we want
@@ -127,12 +127,12 @@ $(document).ready(function(){
                     );
                 }
                 })
-            .fail(function(data) {
+                .fail(function(data) {
                 // when request fails
                 Gimmie.throwError(
                     'iTunes API Error',
                     'There was an error retrieving the info. Check the iTunes URL or try again later.');
-                });
+            });
         } else {
             /* else throw an error */
             Gimmie.throwError(
