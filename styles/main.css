@@ -77,7 +77,7 @@ body {
       -ms-border-radius: 3px;
       -o-border-radius: 3px;
       border-radius: 3px; }
-      body form input :focus {
+      body form input:focus {
         border-color: #d7c6cf; }
     body form button {
       text-decoration: none;
@@ -101,9 +101,9 @@ body {
       margin: 0;
       padding: 0 1em;
       font-family: "Acme", sans-serif; }
-      body form button :hover {
+      body form button:hover {
         cursor: pointer; }
-      body form button :disabled {
+      body form button:disabled {
         opacity: .5; }
   body .wrapper {
     background: #dfdfde;
@@ -133,7 +133,11 @@ body {
     body .content em {
       font-style: normal;
       background-color: #ebdada; }
-  body .content--loading :before {
+    body .content img[src*="icon-mask.png"] {
+      position: absolute;
+      left: 0;
+      top: 0; }
+  body .content--loading:before {
     content: '';
     position: absolute;
     top: 0;
@@ -143,7 +147,7 @@ body {
     background: #ebdada;
     opacity: .9;
     z-index: 10; }
-  body .content--loading :after {
+  body .content--loading:after {
     content: url("../Loading_icon.gif");
     position: absolute;
     left: 50%;
