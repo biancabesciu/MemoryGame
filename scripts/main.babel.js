@@ -1,6 +1,8 @@
 /* WHAT THE APP DOES
-   API-based app, that uses the iTunes API
-   User will take the URL of any iOS or Mac app and render its full resolution icon right in the browser.
+
+   API-based app, that uses the iTunes API, by creating a lookup request to search for content in the stores based on iTunes IDs
+
+   User will take the URL of any iOS or Mac app store and render its full resolution icon right in the browser.
  */
 
 let Fetch = {
@@ -105,7 +107,7 @@ $(document).ready(function(){
         //execute the validation function in Fetch.validate()
         Fetch.validate();
         if(Fetch.userInputIsValid) {
-            /* if input valid make API request */
+            //if input valid make API lookup request
             $.ajax({
                 url: "https://itunes.apple.com/lookup?id=" + Fetch.appId,
                 dataType: 'json'
@@ -134,7 +136,7 @@ $(document).ready(function(){
                     'There was an error retrieving the info. Check the iTunes URL or try again later.');
             });
         } else {
-            /* else throw an error */
+            // else throw an error
             Fetch.throwError(
                 'Invalid Link',
                 'You must submit a standard iTunes store link with an ID, i.e. <br> <a href="https://itunes.apple.com/us/app/twitter/id333903271?mt=8">https://itunes.apple.com/us/app/twitter/<em>id333903271</em>?mt=8</a>'
