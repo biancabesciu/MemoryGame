@@ -83,7 +83,7 @@ let Gimmie = {
             // If it's an iOS icon, load the mask too
             if(response.kind !== 'mac-software') {
                 let mask = new Image();
-                mask.src = 'icon-mask.png';
+                mask.src = 'img/icon-mask.png';
                 mask.onload = function () {
                     Gimmie.$content.prepend(this);
                 }

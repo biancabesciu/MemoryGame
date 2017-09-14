@@ -1,13 +1,20 @@
 /*
 General Styles
-
-  Colors
 */
+/*
+Imports
+ */
 @media screen and (max-width: 600px) {
   header p {
     text-indent: 0;
     margin-top: .5em; } }
 
+/*
+Mixins
+*/
+/*
+Styling content
+ */
 *,
 *:before,
 *:after {
@@ -17,7 +24,7 @@ General Styles
 
 html {
   box-sizing: border-box;
-  background: #d7c6cf;
+  background: #ebdada;
   text-align: center; }
 
 /*Using body as wrapper by setting it's max-width*/
@@ -25,8 +32,6 @@ body {
   font-size: 1em;
   line-height: 1.5;
   font-family: Lucida Grande, sans-serif;
-  max-width: 43.75em;
-  margin: 0 auto;
   padding: 0;
   color: dimgray;
   /*
@@ -47,10 +52,22 @@ body {
     color: inherit; }
   body header {
     margin: 1em 0 2em;
-    color: #363b74; }
+    margin-top: 0;
+    padding: 2em;
+    color: #363b74;
+    background-color: #d7c6cf;
+    -webkit-transition: all 0.5s ease 0s;
+    -moz-transition: all 0.5s ease 0s;
+    -o-transition: all 0.5s ease 0s;
+    transition: all 0.5s ease 0s; }
+    body header:hover {
+      -webkit-transform: scale(1.2);
+      -moz-transform: scale(1.2);
+      -o-transform: scale(1.2);
+      transform: scale(1.2); }
     body header h1 {
       font-family: "Acme", sans-serif;
-      font-size: 3em;
+      font-size: 4em;
       text-shadow: 0 4px 2px rgba(0, 0, 0, 0.1);
       margin: 0; }
       body header h1 a {
@@ -61,7 +78,9 @@ body {
       text-shadow: 0 1px 0 rgba(0, 0, 0, 0.15);
       font-size: .875em; }
   body form {
-    position: relative; }
+    position: relative;
+    max-width: 43.75em;
+    margin: 0 auto; }
     body form input {
       width: 100%;
       display: block;
@@ -77,8 +96,8 @@ body {
       -ms-border-radius: 3px;
       -o-border-radius: 3px;
       border-radius: 3px; }
-      body form input:focus {
-        border-color: #d7c6cf; }
+      body form input:focus, body form input:active, body form input:visited {
+        border-color: blueviolet; }
     body form button {
       text-decoration: none;
       background: #363b74;
@@ -102,15 +121,17 @@ body {
       padding: 0 1em;
       font-family: "Acme", sans-serif; }
       body form button:hover {
-        cursor: pointer; }
+        cursor: pointer;
+        color: #ffffff; }
       body form button:disabled {
         opacity: .5; }
   body .wrapper {
-    background: #dfdfde;
-    border: 1px solid #ccc;
+    background: #fff;
+    border: 1px solid #ffffff;
     text-align: center;
     padding: 2em;
-    margin: .5em 0 2em;
+    margin: 30px auto;
+    max-width: 43.75em;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
@@ -148,7 +169,7 @@ body {
     opacity: .9;
     z-index: 10; }
   body .content--loading:after {
-    content: url("../Loading_icon.gif");
+    content: url("../img/Loading_icon.gif");
     position: absolute;
     left: 50%;
     top: 3em;
@@ -157,3 +178,29 @@ body {
     z-index: 11; }
   body .content--error {
     color: #363b74; }
+  body footer {
+    margin-bottom: 0;
+    padding: 2em;
+    font-family: "Acme", sans-serif;
+    background-color: #d7c6cf;
+    -webkit-transition: all 0.5s ease 0s;
+    -moz-transition: all 0.5s ease 0s;
+    -o-transition: all 0.5s ease 0s;
+    transition: all 0.5s ease 0s; }
+    body footer:hover {
+      -webkit-transform: scale(1.2);
+      -moz-transform: scale(1.2);
+      -o-transform: scale(1.2);
+      transform: scale(1.2); }
+    body footer img {
+      width: 120px;
+      height: 50px;
+      -webkit-transition: all 0.5s ease 0s;
+      -moz-transition: all 0.5s ease 0s;
+      -o-transition: all 0.5s ease 0s;
+      transition: all 0.5s ease 0s; }
+      body footer img:hover {
+        -webkit-transform: scale(1.15) rotate(360deg);
+        -moz-transform: scale(1.15) rotate(360deg);
+        -o-transform: scale(1.15) rotate(360deg);
+        transform: scale(1.15) rotate(360deg); }

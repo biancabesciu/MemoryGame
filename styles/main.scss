@@ -1,18 +1,26 @@
 /*
 General Styles
-
-  Colors
 */
 
 $highlight: #363b74;
 $text: dimgray;
 $text-light: #9A9A9A;
-$body-background: #d7c6cf;
+$body-background: #ebdada;
+$background-color: #d7c6cf;
+$border-color: blueviolet;
 $font: 'Acme', sans-serif;
+$max-width: 43.75em; // 880/16
+$padding: 0;
+
+/*
+Imports
+ */
 
 @import 'media';
 
-//Mixins
+/*
+Mixins
+*/
 @mixin border-radius($radius) {
     -webkit-border-radius: $radius;
     -moz-border-radius: $radius;
@@ -21,12 +29,30 @@ $font: 'Acme', sans-serif;
     border-radius: $radius;
 }
 
+@mixin transition ($transition) {
+    -webkit-transition: $transition;
+    -moz-transition: $transition;
+    -o-transition: $transition;
+    transition: $transition;
+}
+
+@mixin transform ($transform) {
+    -webkit-transform: $transform;
+    -moz-transform: $transform;
+    -o-transform: $transform;
+    transform: $transform;
+}
+
+/*
+Styling content
+ */
+
 *,
 *:before,
 *:after {
     box-sizing: inherit;
     margin: 0;
-    padding: 0;
+    padding: $padding;
 }
 
 
@@ -41,9 +67,7 @@ body {
     font-size: 1em;
     line-height: 1.5;
     font-family: Lucida Grande, sans-serif;
-    max-width: 43.75em; // 880/16
-    margin: 0 auto;
-    padding: 0;
+    padding: $padding;
     color: $text;
 
     img {
@@ -61,11 +85,19 @@ body {
 
     header {
         margin: 1em 0 2em;
+        margin-top: 0;
+        padding: 2em;
         color: $highlight;
+        background-color: $background-color;
+        @include transition (all 0.5s ease 0s);
+
+        &:hover {
+            @include transform(scale(1.20));
+        }
 
         h1 {
             font-family: $font;
-            font-size: 3em;
+            font-size: 4em;
             text-shadow: 0 4px 2px rgba(0, 0, 0, .1);
             margin: 0;
 
@@ -89,6 +121,8 @@ body {
 
     form {
         position: relative;
+        max-width: $max-width;
+        margin: 0 auto;
 
         input {
             width: 100%;
@@ -104,7 +138,15 @@ body {
             @include border-radius(3px);
 
             &:focus {
-                border-color: #d7c6cf;
+                border-color: $border-color;
+            }
+
+            &:active {
+                @extend :focus;
+            }
+
+            &:visited {
+                @extend :focus;
             }
         }
 
@@ -129,6 +171,7 @@ body {
 
             &:hover {
                 cursor: pointer;
+                color: #ffffff;
             }
 
             &:disabled {
@@ -143,11 +186,12 @@ body {
     Main container for content, i.e. the icons, error messages, etc
     */
     .wrapper {
-        background: #dfdfde;
-        border: 1px solid #ccc;
+        background: #fff;
+        border: 1px solid #ffffff;
         text-align: center;
         padding: 2em;
-        margin: .5em 0 2em;
+        margin: 30px auto;
+        max-width: $max-width;
         box-shadow: 0 2px 4px rgba(0, 0, 0, .1);
         @include border-radius(3px);
         position: relative;
@@ -162,7 +206,7 @@ body {
         * {
              //does a simple reset on elements in .content
             margin: 0;
-            padding: 0;
+            padding: $padding;
         }
 
         strong {
@@ -201,7 +245,7 @@ body {
 
         //displays an animated loading gif inside our box
         &:after {
-            content: url('../Loading_icon.gif');
+            content: url('../img/Loading_icon.gif');
             position: absolute;
             left: 50%;
             top: 3em;
@@ -213,6 +257,28 @@ body {
 
     .content--error {
         color: $highlight;
+    }
+
+    footer {
+        margin-bottom: 0;
+        padding: 2em;
+        font-family: $font;
+        background-color: $background-color;
+        @include transition (all 0.5s ease 0s);
+
+        &:hover {
+            @include transform(scale(1.20));
+        }
+
+        img {
+            width: 120px;
+            height: 50px;
+            @include transition (all 0.5s ease 0s);
+
+            &:hover {
+                @include transform(scale(1.15) rotate(360deg));
+            }
+        }
     }
 }
 
