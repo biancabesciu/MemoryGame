@@ -169,11 +169,11 @@ body {
     opacity: .9;
     z-index: 10; }
   body .content--loading:after {
-    content: url("../img/Loading_icon.gif");
+    content: url("../img/loading.gif");
     position: absolute;
     left: 50%;
     top: 3em;
-    margin-left: -16px;
+    margin-left: -252px;
     margin-top: -16px;
     z-index: 11; }
   body .content--error {
