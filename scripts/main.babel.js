@@ -72,6 +72,8 @@ let Fetch = {
         //when it's done fetching the img
         //starts this function
         icon.onload = function() {
+            //execute toggleLoading
+            Fetch.toggleLoading();
             //set the HTML $content to the retrieved img
             Fetch.$content
                 .html(this)
@@ -79,8 +81,6 @@ let Fetch = {
                 //shows the app's name along with its icon
                 .append('<p><strong>' + response.trackName + '</strong></p>')
                 .removeClass('content--error');
-            //execute toggleLoading
-            Fetch.toggleLoading();
 
             // If it's an iOS icon, load the mask too
             if(response.kind !== 'mac-software') {
