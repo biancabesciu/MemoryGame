@@ -19,7 +19,7 @@ let Fetch = {
         this.$form.find('button').prop('disabled', function(i, v) { return !v; });
     },
 
-    //creating 3 variables
+    //creating 3 variable
     //user input
     userInput: '',
     //boolean which will be true or false
