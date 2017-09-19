@@ -1,8 +1,9 @@
 /* WHAT THE APP DOES
 
-   API-based app, that uses the iTunes API, by creating a lookup request to search for content in the stores based on iTunes IDs
+   API-based app, that uses the iTunes API, by creating a lookup request to search for content in iTune store based on iTunes IDs
 
    User will take the URL of any iOS or Mac app store and render its full resolution icon right in the browser.
+   e.g.: https://itunes.apple.com/us/app/follower-butler-followers-tracker-for-instagram/id880538605?mt=8
  */
 
 let Fetch = {
